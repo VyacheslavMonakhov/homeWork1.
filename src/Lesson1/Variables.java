@@ -1,3 +1,5 @@
+package Lesson1;
+
 public class Variables {
     byte a=3;
     short b=979;
