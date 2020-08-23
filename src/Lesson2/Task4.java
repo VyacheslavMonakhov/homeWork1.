@@ -5,7 +5,6 @@ public class Task4 {
         int[][] arr = new int[4][4];
         sguareArray(arr);
     }
-
     private static void sguareArray(int[][] arr) {
         for (int i = 0; i < arr.length; i++) {
             for (int j = 0, x = arr[i].length - 1; j < arr[i].length; j++, x--) {
