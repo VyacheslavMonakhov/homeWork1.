@@ -1,34 +1,34 @@
 package Lesson6;
 
-public class Animal /* extends Object*/ {
+public abstract class Animal {
 
-    protected final String name;
-    protected final int age;
+    protected int maxRunDistance;
+    protected int maxJumpHeight;
+    protected int maxSwimDistance;
 
-    public Animal(String name, int age) {
-        this.name = name;
-        this.age = age;
+    public Animal(int maxRunDistance, int maxJumpHeight, int maxSwimDistance) {
+        this.maxRunDistance = maxRunDistance;
+        this.maxJumpHeight = maxJumpHeight;
+        this.maxSwimDistance = maxSwimDistance;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public final String getName() {
-        return name;
-    }
+    public abstract boolean run(int distance);
+    public abstract boolean swim(int distance);
+    public abstract boolean jump(int height);
 
     public void printInfo() {
-        System.out.println(toString());
+        System.out.println(this);
     }
-
-    public abstract void voice();
 
     @Override
     public String toString() {
-        return "Animal{" +
-                "name='" + name + '\'' +
-                ", age=" + age +
+        return this.getClass().getSimpleName() + "{" +
+                "maxRunDistance=" + maxRunDistance +
+                ", maxJumpHeight=" + maxJumpHeight +
+                ", maxSwimDistance=" + maxSwimDistance +
                 '}';
     }
 }
+
+
+

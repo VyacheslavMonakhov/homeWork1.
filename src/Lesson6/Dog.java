@@ -2,30 +2,48 @@ package Lesson6;
 
 public class Dog extends Animal {
 
-    private String type;
+    public static final int DEFAULT_MAX_RUN_DISTANCE = 500;
+    public static final int DEFAULT_MAX_JUMP_HEIGHT = 1;
+    public static final int DEFAULT_MAX_SWIM_DISTANCE = 10;
 
-    public Dog(String name, int age, String type) {
-        super(name, age);
-        this.type = type;
+    public Dog(int maxRunDistance, int maxJumpHeight, int maxSwimDistance) {
+        super(maxRunDistance, maxJumpHeight, maxSwimDistance);
+    }
+
+    public Dog() {
+        super(DEFAULT_MAX_RUN_DISTANCE, DEFAULT_MAX_JUMP_HEIGHT, DEFAULT_MAX_SWIM_DISTANCE);
     }
 
     @Override
-    public void voice() {
-//        super.voice();
-        bark();
-    }
+    public boolean run(int distance) {
+        if (this.maxRunDistance >= distance) {
+            System.out.printf("Собака пробежала дистанцию %d. Max = %d%n", distance, maxRunDistance);
+            return true;
+        }
 
-    public void bark() {
-        System.out.println("Собака гавкнула!");
+        System.out.printf("Собака не смогла пробежать дистанцию %d. Max = %d%n", distance, maxRunDistance);
+        return false;
     }
 
     @Override
-    public String toString() {
-        return "Dog{" +
-                "type='" + type + '\'' +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                '}';
+    public boolean swim(int distance) {
+        if (this.maxSwimDistance >= distance) {
+            System.out.printf("Собака переплыла дистанцию %d. Max = %d%n", distance, maxSwimDistance);
+            return true;
+        }
+
+        System.out.printf("Собака не смогла переплыть дистанцию %d. Max = %d%n", distance, maxSwimDistance);
+        return false;
+    }
+
+    @Override
+    public boolean jump(int height) {
+        if (this.maxJumpHeight >= height) {
+            System.out.printf("Собака перепрыгнула препятствие %d. Max = %d%n", height, maxJumpHeight);
+            return true;
+        }
+
+        System.out.printf("Собака не смогла перепрыгнуть препятствие %d. Max = %d%n", height, maxJumpHeight);
+        return false;
     }
 }
-
