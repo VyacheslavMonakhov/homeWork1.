@@ -4,13 +4,13 @@ import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
 
-public class PlayTicTacToe {
-    private static final char DOT_EMPTY = '•';
-    private static final char DOT_X = 'X';
-    private static final char DOT_O = 'O';
+public class PlayTicTacToe extends GridLayout {
+//    private static final char DOT_EMPTY = '•';
+//    private static final char DOT_X = 'X';
+//    private static final char DOT_O = 'O';
 
-    private static final int SIZE = 5;
-    private static final int DOTS_TO_WIN = 4;
+//    public static final int SIZE = 5;
+//    public static final int DOTS_TO_WIN = 4;
 
     private static final char[][] map = new char[SIZE][SIZE];
     private static final Scanner scanner = new Scanner(System.in);
@@ -24,7 +24,7 @@ public class PlayTicTacToe {
         System.out.println("Игра окончена!");
     }
 
-    private static void playGame() {
+    public static void playGame() {
         while (true) {
             humanTurn();
             printMap();
@@ -37,12 +37,12 @@ public class PlayTicTacToe {
                 break;
         }
     }
-    private static void prepareGame() {
+    public static void prepareGame() {
         initMap();
         printMap();
     }
 
-    private static boolean isMapFull() {
+    public static boolean isMapFull() {
         for (char[] row : map) {
             for (char cell : row) {
                 if (cell == DOT_EMPTY) {
@@ -52,7 +52,7 @@ public class PlayTicTacToe {
         }
         return true;
     }
-    private static boolean checkEnd(char symbol, String winMessage) {
+    public static boolean checkEnd(char symbol, String winMessage) {
         if (checkWin(symbol)) {
             System.out.println(winMessage);
             return true;
@@ -64,12 +64,12 @@ public class PlayTicTacToe {
         return false;
     }
 
-    private static boolean checkWin(char symbol) {
+    public static boolean checkWin(char symbol) {
         if (checkRowsAndCols(symbol)) return true;
         return checkDiagonals(symbol);
     }
 
-    private static boolean checkDiagonals(char symbol) {
+    public static boolean checkDiagonals(char symbol) {
         int mainDiagCounter = 0;
         int sideDiagCounter = 0;
         for (int i = 0; i < SIZE; i++) {
@@ -82,7 +82,7 @@ public class PlayTicTacToe {
         return false;
     }
 
-    private static boolean checkRowsAndCols(char symbol) {
+    public static boolean checkRowsAndCols(char symbol) {
         for (int i = 0; i < SIZE; i++) {
             int rowCounter = 0;
             int colCounter = 0;
@@ -97,7 +97,7 @@ public class PlayTicTacToe {
         return false;
     }
 
-    private static void aiTurn() {
+    public static void aiTurn() {
         int[] cell = getCellToBlockOpponent(DOT_X);
         if (cell == null) {
             cell = getRandomEmptyCell();
@@ -107,7 +107,7 @@ public class PlayTicTacToe {
         setCell(rowIndex, colIndex, DOT_O);
     }
 
-    private static int[] getRandomEmptyCell() {
+    public static int[] getRandomEmptyCell() {
         int rowIndex, colIndex;
         do {
             rowIndex = random.nextInt(SIZE);
@@ -117,7 +117,7 @@ public class PlayTicTacToe {
     }
 
     @SuppressWarnings("SameParameterValue")
-    private static int[] getCellToBlockOpponent(char opponentSymbol) {
+    public static int[] getCellToBlockOpponent(char opponentSymbol) {
         for (int rowIndex = 0; rowIndex < map.length; rowIndex++) {
             for (int colIndex = 0; colIndex < map[rowIndex].length; colIndex++) {
                 if (map[rowIndex][colIndex] == DOT_EMPTY && isGameMoveWinning(rowIndex, colIndex, opponentSymbol)) {
@@ -128,18 +128,18 @@ public class PlayTicTacToe {
         return null;
     }
 
-    private static boolean isGameMoveWinning(int rowIndex, int colIndex, char opponentSymbol) {
+    public static boolean isGameMoveWinning(int rowIndex, int colIndex, char opponentSymbol) {
         setCell(rowIndex, colIndex, opponentSymbol);
         boolean result = checkWin(opponentSymbol);
         setCell(rowIndex, colIndex, DOT_EMPTY);
         return result;
     }
 
-    private static void setCell(int rowIndex, int colIndex, char symbol) {
+    public static void setCell(int rowIndex, int colIndex, char symbol) {
         map[rowIndex][colIndex] = symbol;
     }
 
-    private static void humanTurn() {
+    public static void humanTurn() {
         int rowIndex = -1, colIndex = -1;
         do {
             System.out.println("Введите координаты в формате '<номер строки> <номер колонки>'");
@@ -159,18 +159,18 @@ public class PlayTicTacToe {
     }
 
     @SuppressWarnings("BooleanMethodIsAlwaysInverted")
-    private static boolean isCellValid(int rowIndex, int colIndex) {
+    public static boolean isCellValid(int rowIndex, int colIndex) {
         if (rowIndex < 0 || rowIndex >= SIZE || colIndex < 0 || colIndex >= SIZE) {
             return false;
         }
         return map[rowIndex][colIndex] == DOT_EMPTY;
     }
-    private static void printMap() {
+    public static void printMap() {
         printColumnNumbers();
         printRows();
         System.out.println();
     }
-    private static void printRows() {
+    public static void printRows() {
         for (int i = 0; i < map.length; i++) {
             System.out.print((i + 1) + " ");
             for (int j = 0; j < map[i].length; j++) {
@@ -179,13 +179,13 @@ public class PlayTicTacToe {
             System.out.println();
         }
     }
-    private static void printColumnNumbers() {
+    public static void printColumnNumbers() {
         for (int i = 0; i <= SIZE; i++) {
             System.out.print(i + " ");
         }
         System.out.println();
     }
-    private static void initMap() {
+    public static void initMap() {
         for (char[] row : map) {
             Arrays.fill(row, DOT_EMPTY);
         }

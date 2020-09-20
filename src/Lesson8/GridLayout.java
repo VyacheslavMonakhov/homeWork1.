@@ -5,11 +5,20 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import static Lesson8.PlayTicTacToe.playGame;
+import static Lesson8.PlayTicTacToe.prepareGame;
+
 public class GridLayout {
+
+    protected static final char DOT_EMPTY = '•';
+    protected static final char DOT_X = 'X';
+    protected static final char DOT_O = 'O';
+
+    public static final int SIZE = 5;
+    public static final int DOTS_TO_WIN = 4;
 
     static public class PlayWindow extends JFrame {
         public PlayWindow() {
-            initComponents();
 
             setTitle("TicTacToe");
             setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -17,17 +26,16 @@ public class GridLayout {
             setLocationRelativeTo(null);
 
             JButton[] jbs = new JButton[25];
-//            jbs.addActionListener(new ActionListener() {
-//                @Override
-                public void actionPerformed(ActionEvent e) {
-                    System.out.println("");
-                }
-//            });
-
             setLayout(new java.awt.GridLayout(5,5));
             for (int i = 0; i < jbs.length; i++) {
                 jbs[i] = new JButton(" ");
                 add(jbs[i]);
+                jbs[i].addActionListener(new ActionListener() {
+                    public void actionPerformed(ActionEvent e) {
+                        System.out.println(((JButton)e.getSource()).getText() + " ");
+                    }
+                });
+
             }
 
 
@@ -41,12 +49,10 @@ public class GridLayout {
             @Override
             public void run() {
                 new PlayWindow();
+
             }
         });
 
-//        prepareGame();
-//        playGame();
-//        System.out.println("Игра окончена!");
 
-        }
+    }
 }
